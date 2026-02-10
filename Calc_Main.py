@@ -28,6 +28,12 @@ class Calculator(tk.Tk):
         btn_eq = tk.Button(self, text="=", font=("Arial", 14), width=5, height=2, command=self.equal)
         btn_eq.grid(row=4, column=2, sticky="nsew")
 
+        ops = [("+", 1), ("-", 2), ("*", 3), ("/", 4)]
+        for (op, row) in ops:
+            btn = tk.Button(self, text=op, font=("Arial", 14), width=5, height=2,
+                            command=lambda o=op: self.add_operator(o))
+            btn.grid(row=row, column=3, sticky="nsew")
+
     def add_number(self, num):
         self.current_expression += num
         self.update_display()
@@ -47,6 +53,10 @@ class Calculator(tk.Tk):
             self.current_expression = "Error"
         self.update_display()
 
-test = Calculator()
+    def add_operator(self, op):
+        self.current_expression += op
+        self.update_display()
 
+
+test = Calculator()
 test.mainloop()
