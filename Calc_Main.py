@@ -25,7 +25,7 @@ class Calculator(tk.Tk):
         btn_clear = tk.Button(self, text="C", font=("Arial", 14), width=5, height=2, command=self.clear)
         btn_clear.grid(row=4, column=0, sticky="nsew")
 
-        btn_eq = tk.Button(self, text="=", font=("Arial", 14), width=5, height=2, command=self.evaluate)
+        btn_eq = tk.Button(self, text="=", font=("Arial", 14), width=5, height=2, command=self.equal)
         btn_eq.grid(row=4, column=2, sticky="nsew")
 
     def add_number(self, num):
@@ -48,4 +48,5 @@ class Calculator(tk.Tk):
         self.update_display()
 
 test = Calculator()
+
 test.mainloop()
