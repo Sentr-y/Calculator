@@ -5,6 +5,7 @@ class Calculator(tk.Tk):
         super().__init__()
         self.title("Lite Calculator")
         self.current_expression = ""
+        self.error = False
 
         # Display
         self.display = tk.Entry(self, font=("Arial", 18), borderwidth=2, relief="ridge")
@@ -31,7 +32,17 @@ class Calculator(tk.Tk):
                             command=lambda o=op: self.add_operator(o))
             btn.grid(row=row, column=3, sticky="nsew")
 
+        for i in range(5):
+            self.grid_rowconfigure(i, weight=1)
+        for i in range(4):
+            self.grid_columnconfigure(i, weight=1)
+
+
+
     def add_number(self, num):
+        if self.error:
+            self.current_expression = ""
+            self.error = False
         self.current_expression += num
         self.update_display()
 
@@ -46,11 +57,17 @@ class Calculator(tk.Tk):
     def equal(self):
         try:
             self.current_expression = str(eval(self.current_expression))
-        except:
+        except ZeroDivisionError:
+            self.current_expression = "Cannot divide by 0"
+            self.error = True
+        except Exception:
             self.current_expression = "Error"
+            self.error = True
         self.update_display()
 
     def add_operator(self, op):
+        if self.error:
+            return
         self.current_expression += op
         self.update_display()
 
