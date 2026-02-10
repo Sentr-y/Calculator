@@ -22,6 +22,11 @@ class Calculator(tk.Tk):
                             command=lambda t=text: self.add_number(t))
             btn.grid(row=row, column=col, sticky="nsew")
 
+        btn_clear = tk.Button(self, text="C", font=("Arial", 14), width=5, height=2, command=self.clear)
+        btn_clear.grid(row=4, column=0, sticky="nsew")
+
+        btn_eq = tk.Button(self, text="=", font=("Arial", 14), width=5, height=2, command=self.evaluate)
+        btn_eq.grid(row=4, column=2, sticky="nsew")
 
     def add_number(self, num):
         self.current_expression += num
@@ -31,6 +36,16 @@ class Calculator(tk.Tk):
         self.display.delete(0, tk.END)
         self.display.insert(0, self.current_expression)
 
+    def clear(self):
+        self.current_expression = ""
+        self.update_display()
+
+    def equal(self):
+        try:
+            self.current_expression = str(eval(self.current_expression))
+        except:
+            self.current_expression = "Error"
+        self.update_display()
 
 test = Calculator()
 test.mainloop()
