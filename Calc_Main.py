@@ -3,7 +3,7 @@ from Calc_widgets import CalcButton
 class Calculator(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.title("Lite Calculator")
+        self.title("Lite Compact Calculator")
         self.current_expression = ""
         self.error = False
 
